@@ -1,0 +1,100 @@
+body  {
+    background-image: url("../images/swanson.jpg");
+    background-size: cover;
+}
+
+.headLogo  {
+    display: block;
+    margin: 0 auto;
+    height: 150px;
+    width: auto;
+}
+
+.score-container  {
+    max-width: 400px;
+    height: 80px;
+    background-color: transparent;
+    margin: 0 auto;
+    border: #00B24E solid 6px;
+    border-radius: 40px;
+}
+ #timer,
+ #score  {
+     text-align: center;
+     font-family: 'Shadows Into Light', cursive;
+     color: #ffffff;
+     font-size: 20px;
+     padding-top: 30px;
+     display: inline-block;
+     width: 190px;
+ }
+
+
+ .game-container  {
+    max-width: 800px;
+    height: 400px;
+    background-color: transparent;
+    margin: 0 auto;
+    border-radius: 20px 60px;
+    border: #00B24E solid 6px;
+}
+
+.question  {
+    background-color: #00B24E;
+    color: #ffffff;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 40px;
+    max-width: 800px;
+    height: 40px;
+    border-radius: 0px 50px 0px 0px;
+    font-family: 'Shadows Into Light', cursive;
+    font-weight: bolder;
+}
+
+.guess {
+    display: inline-block;
+    width: 356px;
+    padding: 20px;
+    text-align: center;
+    height: 70px;
+    background-color: transparent;
+    border: solid 5px #ffffff;
+    margin: 20px;
+    border-radius: 20px 60px;
+    font-size: 20px;
+    font-family: 'Shadows Into Light', cursive;
+    color: #ffffff;
+    outline: none;
+}
+
+
+.guess:hover  {
+    box-shadow: 5px 10px 8px #888888;
+    cursor: pointer;
+}
+
+.action  {
+    display: block;
+    margin: 0 auto;
+    width: 356px;
+    padding: 20px;
+    text-align: center;
+    height: 70px;
+    background-color: #00B24E;
+    border: solid 5px #ffffff;
+    border-radius: 20px 60px;
+    font-size: 20px;
+    font-family: 'Shadows Into Light', cursive;
+    color: #ffffff;
+    outline: none;
+}
+
+.action:hover  {
+    box-shadow: 5px 10px 8px #888888;
+    cursor: pointer;
+}
+
+
+
+

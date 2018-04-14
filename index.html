@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia Game</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo|Shadows+Into+Light" rel="stylesheet">
+</head>
+<body>
+        <div><img src="assets/images/parksAndRec.png" alt="Logo" class="headLogo"></div>
+        <div class="score-container">
+            <div id="timer">Timer</div>
+            <div id="score">Score</div>
+        </div>
+        <br>
+        <button class="start-button action">Start Game</button>
+        <button class="game-over action" style="display:none">Game Over</button>
+        <div class="game-container" id="game-container" style="display:none">
+            <div class="question" id="question"></div>
+            <button class="guess" id="choice-1" value="1"></button>
+            <button class="guess" id="choice-2" value="2"></button>
+            <button class="guess" id="choice-3" value="3"></button>
+            <button class="guess" id="choice-4" value="4"></button>
+        </div>
+        <div class="results-container" style="display:none">
+            <div class="answer-value"></div>
+            <div class="correct-answer"></div>
+            <button class="next-question action">Next</button>
+        </div>
+ 
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/game.js"></script>
+
+
+</html>
