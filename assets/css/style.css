@@ -95,6 +95,45 @@ body  {
     cursor: pointer;
 }
 
+.answer-value  {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    text-align: center;
+    height: 30px;
+    background-color: #ffffff;
+    border: solid 5px #00B24E;
+    border-radius: 20px 60px;
+    font-size: 20px;
+    font-family: 'Shadows Into Light', cursive;
+    color: #00B24E;
+    outline: none;
+}
+
+.correct-answer  {
+    display: block;
+    margin: 0 auto;
+    width: 400px;
+    text-align: center;
+    height: 30px;
+    background-color: #ffffff;
+    border: solid 5px #00B24E;
+    border-radius: 20px 60px;
+    font-size: 20px;
+    font-family: 'Shadows Into Light', cursive;
+    color: #00B24E;
+    outline: none;
+}
+
+
+.img-container  {
+    display: block;
+    margin: 0 auto;
+    height: 200px;
+    widows: 200px;
+}
+
+
 
 
 
