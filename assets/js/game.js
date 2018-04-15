@@ -4,6 +4,20 @@ var userScore = 0;
 //Counts the amount of questions
 var currentQuestion = 0;
 var timer = 30;
+var timerCount;
+var startTimer = function()  {
+    timerCount = setInterval(function()  {
+        console.log(timer);
+        if(timer === 0)  {
+        } else  {
+        $("#timer").text(timer);
+        timer--;
+    }
+    }, 1000);
+    
+ }
+
+
 var questionArr = [
     {
         question: "What is the original name of Andy's band?",
@@ -135,16 +149,25 @@ var questionArr = [
     }
 ]
 
-$(document).on('click', ".start-button", function() {
-    $(".start-button").hide();
-    resetGame();
+$(document).ready(function(){
     checkGuess();
-})
+    $(document).on('click', ".start-button", function() {
+        $(".start-button").hide();
+        resetGame();
+    });
+});
 
 
+
+// var timerClock = function()  {
+    
+// }
 
 var renderQuestions = function()  {
     $(".game-container").show();
+    $(".score-container").show();
+    startTimer();
+    $(".img-container").hide();
     $("#question").text(questionArr[currentQuestion].question);
     $("#choice-1").text(questionArr[currentQuestion].choice1);
     $("#choice-2").text(questionArr[currentQuestion].choice2);
@@ -155,11 +178,15 @@ var renderQuestions = function()  {
 var checkGuess = function()  {
     //Collect value and compare to question answer
     $(document).on('click', ".guess", function(){
-        timer = 0;
+        clearInterval(timerCount);
+        timer = 30;
+        console.log("works");
         var userGuess = $(this).val();
-        console.log(currentQuestion);
+        console.log(typeof userGuess);
+        console.log(typeof $(this).val());
         if(userGuess == questionArr[currentQuestion].answer)  {
             userScore++;
+            console.log("correct guess");
             $("#score").text(userScore + " Correct");
             currentQuestion++
             renderCorrect();
@@ -171,30 +198,14 @@ var checkGuess = function()  {
 
 }
 
-// var selectQuestion = function()  {
-    
-//     //Stops question count
-//     if(currentQuestion == (questionArr.length))  {
-//         console.log("This is the current question: " + currentQuestion);
-//         endGame();
-//     } else {            
-//             //Add to question counter
-//         renderQuestions();
-//    //Render new question with added index
-//     }
-// }
-
-
 var endGame = function()  {
     $(".game-container").hide();
     $(".results-container").hide();
+    $(".image-container").attr('src', "assets/images/dead.gif")
     $(".game-over").show();
     $(document).on('click', ".game-over", function(){
         $(".game-over").hide();
         $(".start-button").show();
-        userScore = 0;
-        currentQuestion = 0;
-        $("#score").text(userScore + " Correct");
     });
 }
 
@@ -216,6 +227,10 @@ var renderCorrect = function()  {
     gameContainer.hide();
  
     resultsConatiner.show();
+    
+
+    $(".img-container").show();
+    $(".score-container").hide();
     
     $(".answer-value").text("Correct");
     $(".correct-answer").text("Correct Answer: " + questionArr[currentQuestion - 1].correctAnswer);
@@ -240,6 +255,11 @@ var renderWrong = function()  {
     gameContainer.hide();
  
     resultsConatiner.show();
+
+    
+
+    $(".img-container").show();
+    $(".score-container").hide();
     
     $(".answer-value").text("Wrong");
     $(".correct-answer").text("Correct Answer: " + questionArr[currentQuestion - 1].correctAnswer);
