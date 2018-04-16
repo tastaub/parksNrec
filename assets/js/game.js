@@ -1,18 +1,27 @@
 // GAME VARIABLES
 //----------------------//
+var gameContainer = $(".game-container");
+var resultsConatiner = $(".results-container")
+
 var userScore = 0;
 //Counts the amount of questions
 var currentQuestion = 0;
+
+
 var timer = 30;
 var timerCount;
 var startTimer = function()  {
     timerCount = setInterval(function()  {
-        console.log(timer);
-        if(timer === 0)  {
+        // console.log(timer);
+        if(timer < 0)  {
+            checkGuess(0);
+            clearInterval(timerCount);
+        
         } else  {
         $("#timer").text(timer);
         timer--;
-    }
+        }
+        
     }, 1000);
     
  }
@@ -25,7 +34,7 @@ var questionArr = [
         choice2: "Fire Smell",
         choice3: "Mouse Rat",
         choice4: "Cheese Poof",
-        answer: 3,       //Answer is equal to value of correct guess
+        answer: "3",       //Answer is equal to value of correct guess
         correctAnswer: "Mouse Rat",
         image: "assets/images/mouserat.gif"
 
@@ -35,7 +44,7 @@ var questionArr = [
         choice2: "BMW",
         choice3: "Jaguar",
         choice4: "Prius",
-        answer: 1, 
+        answer: "1", 
         correctAnswer: "Mercedes",
         image: "assets/images/donna.gif"
     },{
@@ -150,11 +159,30 @@ var questionArr = [
 ]
 
 $(document).ready(function(){
-    checkGuess();
     $(document).on('click', ".start-button", function() {
         $(".start-button").hide();
         resetGame();
     });
+    $(document).on('click', ".guess", function(){
+        userGuess = $(this).val();
+        console.log(typeof userGuess);
+        console.log(typeof questionArr[currentQuestion].answer)
+
+        checkGuess(userGuess);
+    });
+    $(".next-question").on('click', function(){
+        if(currentQuestion == (questionArr.length))  {
+            // console.log("This is the current question: " + currentQuestion);
+            endGame();
+        } else{
+            resultsConatiner.hide();
+            renderQuestions();
+        }
+    $(document).on('click', ".game-over", function(){
+        $(".game-over").hide();
+        $(".start-button").show();
+        });
+    })
 });
 
 
@@ -175,18 +203,17 @@ var renderQuestions = function()  {
     $("#choice-4").text(questionArr[currentQuestion].choice4);
 }
 
-var checkGuess = function()  {
+var checkGuess = function(userGuess)  {
     //Collect value and compare to question answer
-    $(document).on('click', ".guess", function(){
+    // $(document).on('click', ".guess", function(){
         clearInterval(timerCount);
         timer = 30;
-        console.log("works");
-        var userGuess = $(this).val();
-        console.log(typeof userGuess);
-        console.log(typeof $(this).val());
+        // console.log("works");
+        // var userGuess = $(this).val();
+        // console.log(typeof userGuess);
         if(userGuess == questionArr[currentQuestion].answer)  {
             userScore++;
-            console.log("correct guess");
+            // console.log("correct guess");
             $("#score").text(userScore + " Correct");
             currentQuestion++
             renderCorrect();
@@ -194,7 +221,7 @@ var checkGuess = function()  {
             currentQuestion++;
             renderWrong();
         }
-    });
+    // });
 
 }
 
@@ -203,10 +230,7 @@ var endGame = function()  {
     $(".results-container").hide();
     $(".image-container").attr('src', "assets/images/dead.gif")
     $(".game-over").show();
-    $(document).on('click', ".game-over", function(){
-        $(".game-over").hide();
-        $(".start-button").show();
-    });
+    
 }
 
 var resetGame = function()  {       //Reset the game back to the beginning
@@ -214,15 +238,14 @@ var resetGame = function()  {       //Reset the game back to the beginning
     userScore = 0;
     $("#score").text(userScore + " Correct");
     currentQuestion = 0;
-    console.log("Current Question" + currentQuestion);
+    // console.log("Current Question" + currentQuestion);
     renderQuestions();
 }
 
 
 
 var renderCorrect = function()  {
-    var gameContainer = $(".game-container");
-    var resultsConatiner = $(".results-container")
+    
     
     gameContainer.hide();
  
@@ -233,24 +256,13 @@ var renderCorrect = function()  {
     $(".score-container").hide();
     
     $(".answer-value").text("Correct");
-    $(".correct-answer").text("Correct Answer: " + questionArr[currentQuestion - 1].correctAnswer);
-    $(".img-container").attr('src', questionArr[currentQuestion -1].image);
-    $(".img-container").html(questionArr[currentQuestion -1].image);
-    $(".next-question").on('click', function(){
-        if(currentQuestion == (questionArr.length))  {
-            console.log("This is the current question: " + currentQuestion);
-            endGame();
-        } else{
-            resultsConatiner.hide();
-            renderQuestions();
-        }
-    })
-
+    $(".correct-answer").text("Correct Answer: " + questionArr[currentQuestion-1].correctAnswer);
+    $(".img-container").attr('src', questionArr[currentQuestion-1].image);
+    $(".img-container").html(questionArr[currentQuestion-1].image);
 }
 
 var renderWrong = function()  {
-    var gameContainer = $(".game-container");
-    var resultsConatiner = $(".results-container")
+    
     
     gameContainer.hide();
  
@@ -262,39 +274,9 @@ var renderWrong = function()  {
     $(".score-container").hide();
     
     $(".answer-value").text("Wrong");
-    $(".correct-answer").text("Correct Answer: " + questionArr[currentQuestion - 1].correctAnswer);
-    $(".img-container").attr('src', questionArr[currentQuestion -1].image);
-    $(".img-container").html(questionArr[currentQuestion -1].image);
-    $(".next-question").on('click', function(){
-        if(currentQuestion == (questionArr.length))  {
-            console.log("This is the current question: " + currentQuestion);
-            endGame();
-        } else{
-            resultsConatiner.hide();
-            renderQuestions();
-        }
-    })
+    $(".correct-answer").text("Correct Answer: " + questionArr[currentQuestion-1].correctAnswer);
+    $(".img-container").attr('src', questionArr[currentQuestion-1].image);
+    $(".img-container").html(questionArr[currentQuestion-1].image);
+    
 
 }
-
-
-
-
-
-
-
-
-
-
-//TIMER
-//----------------------//
-//TIMER STARTS AT 30 SECONDS
-//ONCE TIMER RUNS OUT NEW QUESTION IS LOADED AND TIMER RESTARTS
-
-//QUESTIONS
-//----------------------//
-//QUESTION, 4 MULTIPLE CHOICE OPTIONS, AND ANSWER STORED IN AN OBJECT
-//QUESTION LOADS AT GAME START
-//RELOAD NEW QUESTION
-//CONTINUE GAME UNTIL NO MORE QUESTIONS REMAIN
-//DISPLAY USER SCORE 
